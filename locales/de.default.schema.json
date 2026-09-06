@@ -1,0 +1,84 @@
+{
+  "settings": {
+    "global": {
+      "name": "Globale Einstellungen",
+      "typography_header": "Typografie",
+      "heading_font": { "label": "Schrift für Überschriften" },
+      "body_font": { "label": "Schrift für Fließtext" }
+    }
+  },
+  "sections": {
+    "jewelry_designer": {
+      "name": "Premium Schmuckdesigner",
+      "settings": {
+        "heading": { "label": "Überschrift" },
+        "subheading": { "label": "Unterüberschrift" },
+        "header_beads_charms": "Perlen & Anhänger",
+        "beads_metaobjects": { "label": "Verfügbare Perlen" },
+        "charms_metaobjects": { "label": "Verfügbare Anhänger" },
+        "header_engraving": "Gravur",
+        "engraving_enabled": { "label": "Gravur anbieten" },
+        "engraving_label": { "label": "Bezeichnung" },
+        "engraving_price": { "label": "Aufpreis für Gravur" },
+        "engraving_max_chars": { "label": "Maximale Zeichenanzahl" },
+        "engraving_fee_product": {
+          "label": "Gravur-Produkt",
+          "info": "Ein einfaches Produkt mit einer Variante, das als separater Posten für die Gravurgebühr zum Warenkorb hinzugefügt wird."
+        },
+        "header_delivery": "Lieferzeit",
+        "delivery_standard_days": { "label": "Lieferzeit (Werktage), z. B. „7–10“" },
+        "delivery_engraving_extra_days": { "label": "Zusätzliche Werktage bei Gravur" },
+        "header_pricing": "Preisdarstellung",
+        "compare_at_price": {
+          "label": "Vergleichspreis (optional)",
+          "info": "Wird durchgestrichen neben dem Gesamtpreis angezeigt, wenn er höher ist als der aktuelle Preis."
+        },
+        "placeholder_image": { "label": "Platzhalterbild" },
+        "header_typography": "Typografie",
+        "heading_font": { "label": "Schrift für Überschriften" },
+        "body_font": { "label": "Schrift für Fließtext" }
+      },
+      "blocks": {
+        "jewelry_type": {
+          "name": "Schmuckart",
+          "settings": {
+            "label": { "label": "Name" },
+            "image": { "label": "Bild" },
+            "product": {
+              "label": "Verknüpftes Produkt",
+              "info": "Die Varianten dieses Produkts müssen die Optionswerte deiner Material- und Größen-Blöcke abbilden."
+            }
+          }
+        },
+        "material": {
+          "name": "Material",
+          "settings": {
+            "label": { "label": "Name" },
+            "swatch": { "label": "Farbe (Swatch)" },
+            "swatch_image": { "label": "Swatch-Bild (optional)" },
+            "preview_image": { "label": "Vorschaubild (optional)" },
+            "price_adjustment": { "label": "Preisaufschlag" },
+            "option_value": {
+              "label": "Variantenoptionswert",
+              "info": "Muss exakt dem Optionswert der Shopify-Variante entsprechen, z. B. „Gold“."
+            }
+          }
+        },
+        "size": {
+          "name": "Größe",
+          "settings": {
+            "label": { "label": "Bezeichnung" },
+            "price_adjustment": { "label": "Preisaufschlag" },
+            "option_value": {
+              "label": "Variantenoptionswert",
+              "info": "Muss exakt dem Optionswert der Shopify-Variante entsprechen, z. B. „M“."
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Premium Schmuckdesigner"
+      }
+    }
+  }
+}

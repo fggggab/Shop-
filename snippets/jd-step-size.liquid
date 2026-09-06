@@ -1,0 +1,27 @@
+{%- comment -%} Step 5: choose size. Accepts `blocks` (section.blocks). {%- endcomment -%}
+
+<section class="jd-step" data-jd-step="size" hidden aria-labelledby="jd-heading-size">
+  <p class="jd-step__eyebrow">{{ 'jewelry_designer.progress.size' | t }}</p>
+  <h2 class="jd-step__title" id="jd-heading-size" data-jd-step-heading>{{ 'jewelry_designer.steps.size.title' | t }}</h2>
+  <p class="jd-step__desc">{{ 'jewelry_designer.steps.size.desc' | t }}</p>
+
+  <div class="jd-pill-group" role="group" aria-label="{{ 'jewelry_designer.steps.size.title' | t }}">
+    {%- for block in blocks -%}
+      <button
+        type="button"
+        class="jd-pill"
+        data-jd-option="size"
+        data-jd-value="{{ block.id }}"
+        aria-pressed="false"
+        {{ block.shopify_attributes }}
+      >
+        {{ block.settings.label }}
+        {%- if block.settings.price_adjustment != 0 -%}
+          &nbsp;· +{{ block.settings.price_adjustment | times: 100 | money_without_trailing_zeros }}
+        {%- endif -%}
+      </button>
+    {%- endfor -%}
+  </div>
+
+  <p class="jd-size-guide">{{ 'jewelry_designer.steps.size.guide' | t }}</p>
+</section>

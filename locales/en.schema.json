@@ -1,0 +1,84 @@
+{
+  "settings": {
+    "global": {
+      "name": "Global settings",
+      "typography_header": "Typography",
+      "heading_font": { "label": "Heading font" },
+      "body_font": { "label": "Body font" }
+    }
+  },
+  "sections": {
+    "jewelry_designer": {
+      "name": "Premium Jewelry Designer",
+      "settings": {
+        "heading": { "label": "Heading" },
+        "subheading": { "label": "Subheading" },
+        "header_beads_charms": "Beads & charms",
+        "beads_metaobjects": { "label": "Available beads" },
+        "charms_metaobjects": { "label": "Available charms" },
+        "header_engraving": "Engraving",
+        "engraving_enabled": { "label": "Offer engraving" },
+        "engraving_label": { "label": "Label" },
+        "engraving_price": { "label": "Engraving surcharge" },
+        "engraving_max_chars": { "label": "Maximum characters" },
+        "engraving_fee_product": {
+          "label": "Engraving product",
+          "info": "A simple single-variant product added as a separate cart line item to charge the engraving fee."
+        },
+        "header_delivery": "Delivery time",
+        "delivery_standard_days": { "label": "Delivery time (business days), e.g. \"7–10\"" },
+        "delivery_engraving_extra_days": { "label": "Extra business days when engraved" },
+        "header_pricing": "Price display",
+        "compare_at_price": {
+          "label": "Compare-at price (optional)",
+          "info": "Shown struck through next to the total price when higher than the current price."
+        },
+        "placeholder_image": { "label": "Placeholder image" },
+        "header_typography": "Typography",
+        "heading_font": { "label": "Heading font" },
+        "body_font": { "label": "Body font" }
+      },
+      "blocks": {
+        "jewelry_type": {
+          "name": "Jewelry type",
+          "settings": {
+            "label": { "label": "Name" },
+            "image": { "label": "Image" },
+            "product": {
+              "label": "Linked product",
+              "info": "This product's variants must mirror the option values of your material and size blocks."
+            }
+          }
+        },
+        "material": {
+          "name": "Material",
+          "settings": {
+            "label": { "label": "Name" },
+            "swatch": { "label": "Swatch color" },
+            "swatch_image": { "label": "Swatch image (optional)" },
+            "preview_image": { "label": "Preview image (optional)" },
+            "price_adjustment": { "label": "Price surcharge" },
+            "option_value": {
+              "label": "Variant option value",
+              "info": "Must exactly match the Shopify variant's option value, e.g. \"Gold\"."
+            }
+          }
+        },
+        "size": {
+          "name": "Size",
+          "settings": {
+            "label": { "label": "Label" },
+            "price_adjustment": { "label": "Price surcharge" },
+            "option_value": {
+              "label": "Variant option value",
+              "info": "Must exactly match the Shopify variant's option value, e.g. \"M\"."
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Premium Jewelry Designer"
+      }
+    }
+  }
+}

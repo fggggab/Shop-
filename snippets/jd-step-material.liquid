@@ -1,0 +1,39 @@
+{%- comment -%} Step 2: choose the material. Accepts `blocks` (section.blocks). {%- endcomment -%}
+
+<section class="jd-step" data-jd-step="material" hidden aria-labelledby="jd-heading-material">
+  <p class="jd-step__eyebrow">{{ 'jewelry_designer.progress.material' | t }}</p>
+  <h2 class="jd-step__title" id="jd-heading-material" data-jd-step-heading>{{ 'jewelry_designer.steps.material.title' | t }}</h2>
+  <p class="jd-step__desc">{{ 'jewelry_designer.steps.material.desc' | t }}</p>
+
+  <div class="jd-option-grid" role="group" aria-label="{{ 'jewelry_designer.steps.material.title' | t }}">
+    {%- for block in blocks -%}
+      <button
+        type="button"
+        class="jd-card"
+        data-jd-option="material"
+        data-jd-value="{{ block.id }}"
+        aria-pressed="false"
+        {{ block.shopify_attributes }}
+      >
+        <span class="jd-card__media">
+          {%- if block.settings.swatch_image != blank -%}
+            <img
+              class="jd-card__swatch"
+              src="{{ block.settings.swatch_image | image_url: width: 300 }}"
+              width="300" height="300"
+              alt="{{ block.settings.label | escape }}"
+              loading="lazy" decoding="async"
+            >
+          {%- else -%}
+            <span class="jd-card__swatch" style="display:block; background: {{ block.settings.swatch }};"></span>
+          {%- endif -%}
+        </span>
+        <span class="jd-card__check">{% render 'jd-icon', name: 'check' %}</span>
+        <span class="jd-card__name">{{ block.settings.label }}</span>
+        {%- if block.settings.price_adjustment != 0 -%}
+          <span class="jd-card__price">+{{ block.settings.price_adjustment | times: 100 | money_without_trailing_zeros }}</span>
+        {%- endif -%}
+      </button>
+    {%- endfor -%}
+  </div>
+</section>

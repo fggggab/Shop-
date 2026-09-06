@@ -1,0 +1,83 @@
+{
+  "sections": {
+    "main": {
+      "type": "diy-jewelry-designer",
+      "blocks": {
+        "type-bracelet": {
+          "type": "jewelry_type",
+          "settings": {
+            "label": "Armband"
+          }
+        },
+        "type-necklace": {
+          "type": "jewelry_type",
+          "settings": {
+            "label": "Halskette"
+          }
+        },
+        "type-earrings": {
+          "type": "jewelry_type",
+          "settings": {
+            "label": "Ohrringe"
+          }
+        },
+        "material-gold": {
+          "type": "material",
+          "settings": {
+            "label": "Gold",
+            "swatch": "#C7A24A",
+            "option_value": "Gold"
+          }
+        },
+        "material-silver": {
+          "type": "material",
+          "settings": {
+            "label": "Silber",
+            "swatch": "#C9CED6",
+            "option_value": "Silber"
+          }
+        },
+        "size-s": {
+          "type": "size",
+          "settings": {
+            "label": "S",
+            "option_value": "S"
+          }
+        },
+        "size-m": {
+          "type": "size",
+          "settings": {
+            "label": "M",
+            "option_value": "M"
+          }
+        },
+        "size-l": {
+          "type": "size",
+          "settings": {
+            "label": "L",
+            "option_value": "L"
+          }
+        }
+      },
+      "block_order": [
+        "type-bracelet",
+        "type-necklace",
+        "type-earrings",
+        "material-gold",
+        "material-silver",
+        "size-s",
+        "size-m",
+        "size-l"
+      ],
+      "settings": {
+        "heading": "Gestalte dein Unikat",
+        "subheading": "Wähle jedes Detail deines Schmuckstücks – von der Fassung bis zur Gravur.",
+        "engraving_enabled": true,
+        "engraving_label": "Gravur",
+        "engraving_max_chars": 20,
+        "delivery_standard_days": "7–10"
+      }
+    }
+  },
+  "order": ["main"]
+}

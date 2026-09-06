@@ -1,0 +1,97 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Getaggt „{{ tags }}“",
+      "page": "Seite {{ page }}"
+    },
+    "accessibility": {
+      "skip_to_content": "Zum Inhalt springen"
+    }
+  },
+  "jewelry_designer": {
+    "aria_label": "Premium Schmuckdesigner",
+    "eyebrow": "Maßgefertigt für dich",
+    "nav_aria_label": "Schritt-Navigation",
+    "actions": {
+      "back": "Zurück",
+      "undo": "Rückgängig",
+      "redo": "Wiederholen",
+      "next": "Weiter",
+      "continue_cta": "Jetzt gestalten",
+      "add_to_cart": "In den Warenkorb",
+      "edit": "Bearbeiten"
+    },
+    "progress": {
+      "jewelry_type": "Schmuckart",
+      "material": "Material",
+      "beads": "Perlen",
+      "charm": "Anhänger",
+      "size": "Größe",
+      "engraving": "Gravur",
+      "preview": "Vorschau",
+      "summary": "Zusammenfassung"
+    },
+    "steps": {
+      "jewelry_type": {
+        "title": "Wähle deine Schmuckart",
+        "desc": "Der erste Schritt zu deinem Unikat: Wähle die Form, die zu dir passt."
+      },
+      "material": {
+        "title": "Wähle dein Material",
+        "desc": "Jedes Material verleiht deinem Schmuckstück einen eigenen Charakter."
+      },
+      "beads": {
+        "title": "Füge Perlen hinzu",
+        "desc": "Kombiniere Farben und Texturen ganz nach deinem Geschmack.",
+        "add": "{{ name }} hinzufügen",
+        "remove": "{{ name }} entfernen"
+      },
+      "charm": {
+        "title": "Wähle einen Anhänger",
+        "desc": "Ein kleines Detail mit großer Bedeutung – ganz optional.",
+        "optional_hint": "Dieser Schritt ist optional. Du kannst jederzeit ohne Anhänger fortfahren."
+      },
+      "size": {
+        "title": "Wähle deine Größe",
+        "desc": "Für den perfekten Sitz – unsere Größentabelle hilft dir bei der Auswahl.",
+        "guide": "Nicht sicher? Miss ein vorhandenes Schmuckstück und vergleiche mit unserer Größentabelle im Hilfebereich."
+      },
+      "engraving": {
+        "title": "Persönliche Gravur",
+        "desc": "Verleihe deinem Schmuckstück eine ganz persönliche Note.",
+        "toggle_label": "Gravur hinzufügen",
+        "toggle_hint": "Handgraviert, in Kleinbuchstaben oder Großbuchstaben.",
+        "input_label": "Dein Gravurtext",
+        "placeholder": "z. B. „Für immer“",
+        "hint": "Buchstaben, Zahlen und Symbole",
+        "unavailable": "Für diese Auswahl ist derzeit keine Gravur verfügbar."
+      },
+      "preview": {
+        "title": "Deine Live-Vorschau",
+        "desc": "So wird dein Schmuckstück aussehen. Wirf einen letzten Blick, bevor es weitergeht.",
+        "image_alt": "Vorschau deines individuellen Schmuckstücks"
+      },
+      "summary": {
+        "title": "Deine Zusammenfassung",
+        "desc": "Überprüfe deine Auswahl – ein Klick auf „Bearbeiten“ bringt dich zurück zu jedem Schritt."
+      }
+    },
+    "preview": {
+      "aria_label": "Live-Vorschau deines Schmuckstücks",
+      "image_alt": "Live-Vorschau deines individuellen Schmuckstücks",
+      "badge": "Live-Vorschau",
+      "total": "Gesamtpreis",
+      "delivery_label": "Lieferung in",
+      "delivery_unit": "Werktagen",
+      "trust": "Handgefertigt auf Bestellung · Kostenlose Rücksendung innerhalb von 30 Tagen"
+    },
+    "js": {
+      "adding": "Wird hinzugefügt …",
+      "added": "Zu deinem Warenkorb hinzugefügt.",
+      "add_failed": "Das hat leider nicht geklappt. Bitte versuche es erneut.",
+      "savings": "Du sparst {{ amount }}",
+      "no_selection": "Noch keine Auswahl getroffen.",
+      "included": "inklusive"
+    }
+  }
+}

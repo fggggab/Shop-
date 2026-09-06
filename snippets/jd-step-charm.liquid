@@ -1,0 +1,36 @@
+{%- comment -%}
+  Step 4: pick an optional charm/pendant. Accepts `charms` (array of
+  `charm` metaobjects, same field shape as `bead`: name, image, variant).
+{%- endcomment -%}
+
+<section class="jd-step" data-jd-step="charm" hidden aria-labelledby="jd-heading-charm">
+  <p class="jd-step__eyebrow">{{ 'jewelry_designer.progress.charm' | t }}</p>
+  <h2 class="jd-step__title" id="jd-heading-charm" data-jd-step-heading>{{ 'jewelry_designer.steps.charm.title' | t }}</h2>
+  <p class="jd-step__desc">{{ 'jewelry_designer.steps.charm.desc' | t }}</p>
+
+  <div class="jd-option-grid jd-option-grid--compact" role="group" aria-label="{{ 'jewelry_designer.steps.charm.title' | t }}">
+    {%- for charm in charms -%}
+      {%- assign charm_variant = charm.variant.value -%}
+      <button type="button" class="jd-card" data-jd-option="charm" data-jd-value="{{ charm.id }}" aria-pressed="false">
+        <span class="jd-card__media">
+          {%- if charm.image.value != blank -%}
+            <img
+              src="{{ charm.image.value | image_url: width: 300 }}"
+              srcset="{{ charm.image.value | image_url: width: 150 }} 150w, {{ charm.image.value | image_url: width: 300 }} 300w"
+              sizes="(min-width: 560px) 120px, 28vw"
+              width="300" height="300"
+              alt="{{ charm.name.value | escape }}"
+              loading="lazy" decoding="async"
+            >
+          {%- endif -%}
+        </span>
+        <span class="jd-card__check">{% render 'jd-icon', name: 'check' %}</span>
+        <span class="jd-card__name">{{ charm.name.value }}</span>
+        {%- if charm_variant.price > 0 -%}
+          <span class="jd-card__price">+{{ charm_variant.price | money_without_trailing_zeros }}</span>
+        {%- endif -%}
+      </button>
+    {%- endfor -%}
+  </div>
+  <p class="jd-step__desc" style="margin-top: var(--jd-space-3); font-size:0.8125rem;">{{ 'jewelry_designer.steps.charm.optional_hint' | t }}</p>
+</section>

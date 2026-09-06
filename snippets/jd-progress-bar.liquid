@@ -1,0 +1,22 @@
+{%- comment -%}
+  Sticky top progress bar. Step order/ids must stay in sync with the
+  STEP_IDS array in assets/jewelry-designer.js.
+{%- endcomment -%}
+
+{%- assign jd_steps = 'jewelry_type,material,beads,charm,size,engraving,preview,summary' | split: ',' -%}
+
+<div class="jd-progress-wrap">
+  <ol class="jd-progress">
+    {%- for step_id in jd_steps -%}
+      <li class="jd-progress__item" data-jd-progress-item="{{ forloop.index0 }}" data-state="upcoming">
+        <button type="button" class="jd-progress__step" data-jd-progress-step data-clickable="false">
+          <span class="jd-progress__index">{{ forloop.index }}</span>
+          <span class="jd-progress__label" data-jd-progress-label>{{ 'jewelry_designer.progress.' | append: step_id | t }}</span>
+        </button>
+      </li>
+      {%- unless forloop.last -%}
+        <li class="jd-progress__connector" aria-hidden="true"></li>
+      {%- endunless -%}
+    {%- endfor -%}
+  </ol>
+</div>

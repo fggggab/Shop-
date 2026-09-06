@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dev Preview — Premium DIY Jewelry Designer</title>
+<!--
+  Local design/QA harness only. NOT part of the Shopify theme — do not
+  deploy this folder. Loads the real assets/*.css and assets/*.js against
+  hand-written mock data so the full flow can be exercised in a plain
+  browser without a Shopify storefront.
+-->
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/jewelry-designer.css">
+<style>
+  .jd-root { --font-heading-family: 'Georgia', serif; --font-body-family: -apple-system, sans-serif; }
+  body { background: #fff; }
+</style>
+</head>
+<body>
+
+<section class="jd-root" data-jewelry-designer data-jd-storage-key="jd:designer:dev-preview">
+  <div class="jd-shell">
+    <header class="jd-intro">
+      <p class="jd-step__eyebrow">Maßgefertigt für dich</p>
+      <h1 class="jd-step__title" style="margin-bottom:8px;">Gestalte dein Unikat</h1>
+      <p class="jd-step__desc">Wähle jedes Detail deines Schmuckstücks – von der Fassung bis zur Gravur.</p>
+    </header>
+
+    <div class="jd-progress-wrap">
+      <ol class="jd-progress" id="progress-list"></ol>
+    </div>
+
+    <div class="jd-layout">
+      <div class="jd-config-column">
+        <div aria-live="polite" class="jd-visually-hidden" data-jd-live-region></div>
+
+        <!-- Step 1: jewelry type -->
+        <section class="jd-step" data-jd-step="jewelryType" aria-labelledby="h1">
+          <p class="jd-step__eyebrow">Schmuckart</p>
+          <h2 class="jd-step__title" id="h1" data-jd-step-heading>Wähle deine Schmuckart</h2>
+          <p class="jd-step__desc">Der erste Schritt zu deinem Unikat: Wähle die Form, die zu dir passt.</p>
+          <div class="jd-option-grid" role="group" aria-label="Schmuckart">
+            <button type="button" class="jd-card" data-jd-option="jewelryType" data-jd-value="bracelet" aria-pressed="false">
+              <span class="jd-card__media"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=60" width="400" height="400" alt="Armband" loading="lazy" decoding="async"></span>
+              <span class="jd-card__check">✓</span>
+              <span class="jd-card__name">Armband</span>
+            </button>
+            <button type="button" class="jd-card" data-jd-option="jewelryType" data-jd-value="necklace" aria-pressed="false">
+              <span class="jd-card__media"><img src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=400&q=60" width="400" height="400" alt="Halskette" loading="lazy" decoding="async"></span>
+              <span class="jd-card__check">✓</span>
+              <span class="jd-card__name">Halskette</span>
+            </button>
+            <button type="button" class="jd-card" data-jd-option="jewelryType" data-jd-value="earrings" aria-pressed="false">
+              <span class="jd-card__media"><img src="https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=400&q=60" width="400" height="400" alt="Ohrringe" loading="lazy" decoding="async"></span>
+              <span class="jd-card__check">✓</span>
+              <span class="jd-card__name">Ohrringe</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 2: material -->
+        <section class="jd-step" data-jd-step="material" hidden aria-labelledby="h2">
+          <p class="jd-step__eyebrow">Material</p>
+          <h2 class="jd-step__title" id="h2" data-jd-step-heading>Wähle dein Material</h2>
+          <p class="jd-step__desc">Jedes Material verleiht deinem Schmuckstück einen eigenen Charakter.</p>
+          <div class="jd-option-grid" role="group" aria-label="Material">
+            <button type="button" class="jd-card" data-jd-option="material" data-jd-value="gold" aria-pressed="false">
+              <span class="jd-card__media"><span class="jd-card__swatch" style="display:block;background:#C7A24A;"></span></span>
+              <span class="jd-card__check">✓</span>
+              <span class="jd-card__name">Gold</span>
+              <span class="jd-card__price">+€20,00</span>
+            </button>
+            <button type="button" class="jd-card" data-jd-option="material" data-jd-value="silver" aria-pressed="false">
+              <span class="jd-card__media"><span class="jd-card__swatch" style="display:block;background:#C9CED6;"></span></span>
+              <span class="jd-card__check">✓</span>
+              <span class="jd-card__name">Silber</span>
+            </button>
+            <button type="button" class="jd-card" data-jd-option="material" data-jd-value="rosegold" aria-pressed="false">
+              <span class="jd-card__media"><span class="jd-card__swatch" style="display:block;background:#E3B7A0;"></span></span>
+              <span class="jd-card__check">✓</span>
+              <span class="jd-card__name">Roségold</span>
+              <span class="jd-card__price">+€15,00</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 3: beads -->
+        <section class="jd-step" data-jd-step="beads" hidden aria-labelledby="h3">
+          <p class="jd-step__eyebrow">Perlen</p>
+          <h2 class="jd-step__title" id="h3" data-jd-step-heading>Füge Perlen hinzu</h2>
+          <p class="jd-step__desc">Kombiniere Farben und Texturen ganz nach deinem Geschmack.</p>
+          <div class="jd-option-grid" role="group" aria-label="Perlen" id="beads-grid"></div>
+        </section>
+
+        <!-- Step 4: charm -->
+        <section class="jd-step" data-jd-step="charm" hidden aria-labelledby="h4">
+          <p class="jd-step__eyebrow">Anhänger</p>
+          <h2 class="jd-step__title" id="h4" data-jd-step-heading>Wähle einen Anhänger</h2>
+          <p class="jd-step__desc">Ein kleines Detail mit großer Bedeutung – ganz optional.</p>
+          <div class="jd-option-grid jd-option-grid--compact" role="group" aria-label="Anhänger" id="charms-grid"></div>
+        </section>
+
+        <!-- Step 5: size -->
+        <section class="jd-step" data-jd-step="size" hidden aria-labelledby="h5">
+          <p class="jd-step__eyebrow">Größe</p>
+          <h2 class="jd-step__title" id="h5" data-jd-step-heading>Wähle deine Größe</h2>
+          <p class="jd-step__desc">Für den perfekten Sitz – unsere Größentabelle hilft dir bei der Auswahl.</p>
+          <div class="jd-pill-group" role="group" aria-label="Größe">
+            <button type="button" class="jd-pill" data-jd-option="size" data-jd-value="s" aria-pressed="false">S</button>
+            <button type="button" class="jd-pill" data-jd-option="size" data-jd-value="m" aria-pressed="false">M</button>
+            <button type="button" class="jd-pill" data-jd-option="size" data-jd-value="l" aria-pressed="false">L</button>
+          </div>
+          <p class="jd-size-guide">Nicht sicher? Miss ein vorhandenes Schmuckstück und vergleiche mit unserer Größentabelle.</p>
+        </section>
+
+        <!-- Step 6: engraving -->
+        <section class="jd-step" data-jd-step="engraving" hidden aria-labelledby="h6">
+          <p class="jd-step__eyebrow">Gravur</p>
+          <h2 class="jd-step__title" id="h6" data-jd-step-heading>Persönliche Gravur</h2>
+          <p class="jd-step__desc">Verleihe deinem Schmuckstück eine ganz persönliche Note.</p>
+          <div class="jd-engrave">
+            <div class="jd-toggle-row">
+              <div>
+                <p class="jd-card__name" style="margin:0;">Gravur hinzufügen</p>
+                <p class="jd-card__meta" style="margin:0;">Handgraviert, in Klein- oder Großbuchstaben.</p>
+              </div>
+              <button type="button" class="jd-switch" role="switch" aria-checked="false" aria-label="Gravur hinzufügen" data-jd-engrave-toggle></button>
+            </div>
+            <div data-jd-engrave-text-wrap hidden>
+              <label class="jd-field-label" for="engrave-input">Dein Gravurtext</label>
+              <input type="text" id="engrave-input" class="jd-input" data-jd-engrave-text maxlength="20" autocomplete="off" placeholder='z. B. „Für immer“'>
+              <div class="jd-input-hint" data-jd-engrave-hint data-over="false">
+                <span>Buchstaben, Zahlen und Symbole</span>
+                <span><span data-jd-engrave-count>0</span>/20</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 7: preview -->
+        <section class="jd-step" data-jd-step="preview" hidden aria-labelledby="h7">
+          <p class="jd-step__eyebrow">Vorschau</p>
+          <h2 class="jd-step__title" id="h7" data-jd-step-heading>Deine Live-Vorschau</h2>
+          <p class="jd-step__desc">So wird dein Schmuckstück aussehen. Wirf einen letzten Blick, bevor es weitergeht.</p>
+          <div class="jd-preview__stage" data-jd-preview-stage style="border-radius: var(--jd-radius-lg); border: 1px solid var(--jd-navy-100); max-width: 480px;">
+            <img data-jd-preview-image class="jd-preview__image" alt="Vorschau" loading="lazy" decoding="async" width="900" height="1125">
+            <p class="jd-preview__engraving" data-jd-preview-engraving hidden></p>
+            <span class="jd-preview__badge">Live-Vorschau</span>
+          </div>
+        </section>
+
+        <!-- Step 8: summary -->
+        <section class="jd-step" data-jd-step="summary" hidden aria-labelledby="h8">
+          <p class="jd-step__eyebrow">Zusammenfassung</p>
+          <h2 class="jd-step__title" id="h8" data-jd-step-heading>Deine Zusammenfassung</h2>
+          <p class="jd-step__desc">Überprüfe deine Auswahl – ein Klick auf „Bearbeiten“ bringt dich zurück zu jedem Schritt.</p>
+          <dl class="jd-preview__list" data-jd-preview-list="compact" style="border:none;padding:0;margin-bottom:24px;"></dl>
+          <div class="jd-summary-grid" id="summary-grid"></div>
+          <button type="button" class="jd-btn jd-btn--primary" data-jd-add-to-cart style="margin-top:32px;width:100%;">
+            <span data-jd-add-to-cart-label>In den Warenkorb</span>
+          </button>
+        </section>
+
+        <nav class="jd-step-nav" aria-label="Schritt-Navigation">
+          <button type="button" class="jd-btn jd-btn--ghost" data-jd-prev disabled>Zurück</button>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="jd-btn jd-btn--icon" data-jd-undo disabled aria-label="Rückgängig">↶</button>
+            <button type="button" class="jd-btn jd-btn--icon" data-jd-redo disabled aria-label="Wiederholen">↷</button>
+          </div>
+          <button type="button" class="jd-btn jd-btn--primary" data-jd-next>Weiter</button>
+        </nav>
+      </div>
+
+      <aside class="jd-preview" aria-label="Live-Vorschau">
+        <div class="jd-preview__stage" data-jd-preview-stage>
+          <img data-jd-preview-image class="jd-preview__image" alt="Live-Vorschau" loading="lazy" decoding="async" width="900" height="1125">
+          <p class="jd-preview__engraving" data-jd-preview-engraving hidden></p>
+          <span class="jd-preview__badge">Live-Vorschau</span>
+        </div>
+        <div class="jd-preview__body">
+          <div class="jd-preview__price-row">
+            <div>
+              <p class="jd-mobile-bar__label" style="margin:0 0 2px;">Gesamtpreis</p>
+              <p class="jd-preview__price" data-jd-price>—</p>
+            </div>
+            <div style="text-align:right;">
+              <p class="jd-preview__compare" data-jd-preview-compare hidden></p>
+              <p class="jd-preview__savings" data-jd-preview-savings hidden></p>
+            </div>
+          </div>
+          <dl class="jd-preview__list" data-jd-preview-list></dl>
+          <p class="jd-preview__delivery" data-jd-delivery>
+            🚚
+            <span>Lieferung in <strong><span data-jd-delivery-days>–</span> Werktagen</strong></span>
+          </p>
+          <button type="button" class="jd-btn jd-btn--primary jd-preview__cta" data-jd-primary-cta>
+            <span data-jd-primary-cta-label>Jetzt gestalten</span>
+          </button>
+          <p class="jd-preview__trust">Handgefertigt auf Bestellung · Kostenlose Rücksendung innerhalb von 30 Tagen</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="jd-mobile-bar">
+    <div>
+      <p class="jd-mobile-bar__label">Gesamtpreis</p>
+      <p class="jd-mobile-bar__price" data-jd-price>—</p>
+    </div>
+    <button type="button" class="jd-btn jd-btn--primary" data-jd-primary-cta>
+      <span data-jd-primary-cta-label>Jetzt gestalten</span>
+    </button>
+  </div>
+
+  <div class="jd-toast" role="status" data-jd-toast></div>
+
+  <script type="application/json" data-jd-config>
+  {
+    "currencyFormat": "€{{ amount }}",
+    "compareAtCents": 24900,
+    "placeholderImage": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1200&q=60",
+    "engraving": { "enabled": true, "label": "Gravur", "priceCents": 900, "maxChars": 20, "variantId": 999999001 },
+    "delivery": { "standardDays": "7–10", "engravingExtraDays": 3 },
+    "jewelryTypes": [
+      { "id": "bracelet", "name": "Armband", "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1200&q=60", "basePriceCents": 8900, "variantMap": { "gold|s": 100001, "gold|m": 100002, "gold|l": 100003, "silver|s": 100004, "silver|m": 100005, "silver|l": 100006, "rosegold|s": 100007, "rosegold|m": 100008, "rosegold|l": 100009 } },
+      { "id": "necklace", "name": "Halskette", "image": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=1200&q=60", "basePriceCents": 12900, "variantMap": { "gold|s": 100010, "gold|m": 100011, "gold|l": 100012, "silver|s": 100013, "silver|m": 100014, "silver|l": 100015, "rosegold|s": 100016, "rosegold|m": 100017, "rosegold|l": 100018 } },
+      { "id": "earrings", "name": "Ohrringe", "image": "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=1200&q=60", "basePriceCents": 7900, "variantMap": { "gold|s": 100019, "silver|s": 100020, "rosegold|s": 100021 } }
+    ],
+    "materials": [
+      { "id": "gold", "name": "Gold", "swatchColor": "#C7A24A", "swatchImage": null, "previewImage": null, "priceModifierCents": 2000 },
+      { "id": "silver", "name": "Silber", "swatchColor": "#C9CED6", "swatchImage": null, "previewImage": null, "priceModifierCents": 0 },
+      { "id": "rosegold", "name": "Roségold", "swatchColor": "#E3B7A0", "swatchImage": null, "previewImage": null, "priceModifierCents": 1500 }
+    ],
+    "sizes": [
+      { "id": "s", "label": "S", "priceModifierCents": 0 },
+      { "id": "m", "label": "M", "priceModifierCents": 0 },
+      { "id": "l", "label": "L", "priceModifierCents": 500 }
+    ],
+    "beads": [
+      { "id": "pearl-white", "name": "Perle Weiß", "image": "https://images.unsplash.com/photo-1611955167811-4711904bb9f4?w=400&q=60", "priceCents": 400, "variantId": 200001 },
+      { "id": "pearl-black", "name": "Perle Schwarz", "image": "https://images.unsplash.com/photo-1611955167811-4711904bb9f4?w=400&q=60", "priceCents": 400, "variantId": 200002 },
+      { "id": "turquoise", "name": "Türkis", "image": "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&q=60", "priceCents": 600, "variantId": 200003 },
+      { "id": "rose-quartz", "name": "Rosenquarz", "image": "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&q=60", "priceCents": 600, "variantId": 200004 }
+    ],
+    "charms": [
+      { "id": "heart", "name": "Herz", "image": "https://images.unsplash.com/photo-1602751584547-7c40c5b7a670?w=300&q=60", "priceCents": 1200, "variantId": 300001 },
+      { "id": "star", "name": "Stern", "image": "https://images.unsplash.com/photo-1602751584547-7c40c5b7a670?w=300&q=60", "priceCents": 1200, "variantId": 300002 },
+      { "id": "moon", "name": "Mond", "image": "https://images.unsplash.com/photo-1602751584547-7c40c5b7a670?w=300&q=60", "priceCents": 1400, "variantId": 300003 }
+    ],
+    "i18n": {
+      "adding": "Wird hinzugefügt …",
+      "added": "Zu deinem Warenkorb hinzugefügt.",
+      "addFailed": "Das hat leider nicht geklappt. Bitte versuche es erneut.",
+      "savings": "Du sparst {{ amount }}",
+      "noSelection": "Noch keine Auswahl getroffen.",
+      "included": "inklusive",
+      "continueCta": "Jetzt gestalten",
+      "addToCart": "In den Warenkorb"
+    }
+  }
+  </script>
+</section>
+
+<script>
+  // Stub the Shopify Ajax Cart endpoint so "Add to cart" can be exercised
+  // without a live storefront. Real theme code hits /cart/add.js directly.
+  const realFetch = window.fetch.bind(window);
+  window.fetch = (url, opts) => {
+    if (typeof url === 'string' && url.includes('/cart/add.js')) {
+      console.log('[dev-preview] stubbed /cart/add.js', JSON.parse(opts.body));
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ items: JSON.parse(opts.body).items }),
+      });
+    }
+    return realFetch(url, opts);
+  };
+</script>
+
+<script>
+  // Fill in the progress bar, bead grid, charm grid and summary cards from
+  // the same step-id list the real Liquid progress bar snippet uses.
+  const steps = [
+    ['jewelryType', 'Schmuckart'],
+    ['material', 'Material'],
+    ['beads', 'Perlen'],
+    ['charm', 'Anhänger'],
+    ['size', 'Größe'],
+    ['engraving', 'Gravur'],
+    ['preview', 'Vorschau'],
+    ['summary', 'Zusammenfassung'],
+  ];
+  const progressList = document.getElementById('progress-list');
+  steps.forEach(([id, label], index) => {
+    const li = document.createElement('li');
+    li.className = 'jd-progress__item';
+    li.dataset.jdProgressItem = String(index);
+    li.dataset.state = 'upcoming';
+    li.innerHTML = `<button type="button" class="jd-progress__step" data-jd-progress-step data-clickable="false">
+      <span class="jd-progress__index">${index + 1}</span>
+      <span class="jd-progress__label" data-jd-progress-label>${label}</span>
+    </button>`;
+    progressList.appendChild(li);
+    if (index < steps.length - 1) {
+      const connector = document.createElement('li');
+      connector.className = 'jd-progress__connector';
+      connector.setAttribute('aria-hidden', 'true');
+      progressList.appendChild(connector);
+    }
+  });
+
+  const beadsGrid = document.getElementById('beads-grid');
+  const beadData = [
+    ['pearl-white', 'Perle Weiß', 400],
+    ['pearl-black', 'Perle Schwarz', 400],
+    ['turquoise', 'Türkis', 600],
+    ['rose-quartz', 'Rosenquarz', 600],
+  ];
+  beadData.forEach(([id, name, price]) => {
+    const div = document.createElement('div');
+    div.className = 'jd-card jd-card--bead';
+    div.dataset.jdOption = 'bead';
+    div.dataset.jdValue = id;
+    div.dataset.qty = '0';
+    div.innerHTML = `
+      <span class="jd-card__media"><img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&q=60" width="400" height="400" alt="${name}" loading="lazy" decoding="async"></span>
+      <span class="jd-card__qty" data-jd-bead-qty-value>0</span>
+      <span class="jd-card__name">${name}</span>
+      <span class="jd-card__price">+€${(price / 100).toFixed(2)}</span>
+      <span style="display:flex; align-items:center; justify-content:space-between; margin-top:4px;">
+        <button type="button" class="jd-btn jd-btn--icon" style="width:30px;height:30px;" data-jd-bead-dec="${id}" disabled aria-label="${name} entfernen">−</button>
+        <button type="button" class="jd-btn jd-btn--icon" style="width:30px;height:30px;" data-jd-bead-inc="${id}" aria-label="${name} hinzufügen">+</button>
+      </span>`;
+    beadsGrid.appendChild(div);
+  });
+
+  const charmsGrid = document.getElementById('charms-grid');
+  const charmData = [
+    ['heart', 'Herz', 1200],
+    ['star', 'Stern', 1200],
+    ['moon', 'Mond', 1400],
+  ];
+  charmData.forEach(([id, name, price]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'jd-card';
+    btn.dataset.jdOption = 'charm';
+    btn.dataset.jdValue = id;
+    btn.setAttribute('aria-pressed', 'false');
+    btn.innerHTML = `
+      <span class="jd-card__media"><img src="https://images.unsplash.com/photo-1602751584547-7c40c5b7a670?w=300&q=60" width="300" height="300" alt="${name}" loading="lazy" decoding="async"></span>
+      <span class="jd-card__check">✓</span>
+      <span class="jd-card__name">${name}</span>
+      <span class="jd-card__price">+€${(price / 100).toFixed(2)}</span>`;
+    charmsGrid.appendChild(btn);
+  });
+
+  const summaryGrid = document.getElementById('summary-grid');
+  const summarySteps = [
+    ['jewelryType', 'Schmuckart'],
+    ['material', 'Material'],
+    ['beads', 'Perlen'],
+    ['charm', 'Anhänger'],
+    ['size', 'Größe'],
+    ['engraving', 'Gravur'],
+  ];
+  summarySteps.forEach(([id, label]) => {
+    const div = document.createElement('div');
+    div.className = 'jd-summary-card';
+    div.innerHTML = `
+      <div>
+        <p class="jd-summary-card__title">${label}</p>
+        <p class="jd-summary-card__value" data-jd-summary-value="${id}">Noch keine Auswahl getroffen.</p>
+      </div>
+      <button type="button" class="jd-btn jd-btn--text jd-summary-card__edit" data-jd-summary-edit="${id}">✎ Bearbeiten</button>`;
+    summaryGrid.appendChild(div);
+  });
+</script>
+
+<script type="module" src="../assets/jewelry-designer.js"></script>
+</body>
+</html>
