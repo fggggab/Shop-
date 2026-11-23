@@ -39,6 +39,14 @@ Run the server in the background. Then check it with
 `curl -sf http://127.0.0.1:8765/health`. If it runs somewhere else, set
 `WATERMARKS_SERVICE_URL`.
 
+## Automatic cleaning on GitHub
+
+Files pushed to `ki-bereinigung/eingang/` are cleaned by the GitHub Actions
+workflow `.github/workflows/ki-bereinigung.yml`. It uses the same
+watermarks-remover scripts, pinned to a fixed commit, and moves the results
+to `ki-bereinigung/ausgang/`. This step covers invisible characters and
+metadata only. It does no humanizer rewriting. See `ki-bereinigung/README.md`.
+
 ## Limits (tell the user when relevant)
 
 - Removing invisible characters and file metadata is reliable.

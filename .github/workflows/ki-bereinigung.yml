@@ -1,0 +1,94 @@
+# Cleans files uploaded to ki-bereinigung/eingang/:
+# strips invisible Unicode from text and AI/C2PA/EXIF/XMP metadata from
+# images, PDFs and Office files, then moves the result to ki-bereinigung/ausgang/.
+# Uses the cleaning scripts from guillaumemeyer/watermarks-remover (MIT),
+# pinned to a fixed commit.
+
+name: KI-Bereinigung
+
+on:
+  push:
+    paths:
+      - "ki-bereinigung/eingang/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ki-bereinigung-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  WM_REPO: https://github.com/guillaumemeyer/watermarks-remover
+  WM_COMMIT: 5a62be6338d2812372b1da440e55c82922f97d53
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ghostscript installieren (für PDFs mit Bildern)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ghostscript
+
+      - name: watermarks-remover laden (fester Stand)
+        run: |
+          mkdir -p "$RUNNER_TEMP/wm" && cd "$RUNNER_TEMP/wm"
+          git init -q
+          git fetch -q --depth 1 "$WM_REPO" "$WM_COMMIT"
+          git checkout -q FETCH_HEAD
+
+      - name: Dateien bereinigen
+        id: clean
+        run: |
+          set -u
+          IN=ki-bereinigung/eingang
+          OUT=ki-bereinigung/ausgang
+          SCRIPT="$RUNNER_TEMP/wm/service/scripts/clean_file.py"
+          mkdir -p "$OUT"
+          ok=0; failed=0
+          {
+            echo "## KI-Bereinigung"
+            echo
+            echo "| Datei | Ergebnis |"
+            echo "| --- | --- |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          while IFS= read -r -d '' f; do
+            rel="${f#"$IN"/}"
+            case "$(basename "$rel")" in .gitkeep|LIESMICH.md) continue ;; esac
+            dest="$OUT/$rel"
+            mkdir -p "$(dirname "$dest")"
+            if python3 -I "$SCRIPT" "$f" -o "$dest" --json > "$RUNNER_TEMP/report.json"; then
+              summary=$(python3 -I -c 'import json,sys; d=json.load(open(sys.argv[1])); a=d.get("actions") or list((d.get("stats") or {}).get("removed",{}).keys()); print(", ".join(a) if a else "nichts gefunden")' "$RUNNER_TEMP/report.json" 2>/dev/null || echo "bereinigt")
+              git rm -q -- "$f"
+              echo "| \`$rel\` | ✅ $summary |" >> "$GITHUB_STEP_SUMMARY"
+              ok=$((ok+1))
+            else
+              echo "| \`$rel\` | ❌ Fehler, Datei bleibt im Eingang |" >> "$GITHUB_STEP_SUMMARY"
+              failed=$((failed+1))
+            fi
+          done < <(find "$IN" -type f -print0)
+
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+
+      - name: Ergebnis committen
+        if: steps.clean.outputs.ok != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add ki-bereinigung/ausgang
+          git commit -q -m "KI-Bereinigung: ${{ steps.clean.outputs.ok }} Datei(en) bereinigt"
+          git push
+
+      - name: Fehler melden
+        if: steps.clean.outputs.failed != '0'
+        run: |
+          echo "::error::${{ steps.clean.outputs.failed }} Datei(en) konnten nicht bereinigt werden. Details in der Zusammenfassung."
+          exit 1
